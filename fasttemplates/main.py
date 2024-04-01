@@ -3,8 +3,8 @@ import os
 import typer
 import questionary
 
-from fastapitemplatewizard.constants import *
-from fastapitemplatewizard.utils import *
+from fasttemplates.constants import *
+from fasttemplates.utils import *
 
 app = typer.Typer()
 
