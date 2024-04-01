@@ -1,0 +1,6 @@
+from pymongo import MongoClient
+
+HOST = ...
+PORT = ...
+
+client = MongoClient(HOST, PORT)

@@ -1,6 +1,8 @@
 import os
 import shutil
 
+from constants import WORKING_DIR
+
 
 def copy_files(src_dir, dst_dir, ignore_dirs=None):
     if ignore_dirs is None:
@@ -18,3 +20,21 @@ def copy_files(src_dir, dst_dir, ignore_dirs=None):
             copy_files(src_item, dst_item, ignore_dirs)
         else:
             shutil.copy2(src_item, dst_item)
+
+
+def add_mongo_uri_to_settings():
+    # Add MONGO_URI to Settings class
+    settings_path = os.path.join(WORKING_DIR, "app\\settings.py")
+    with open(settings_path, "r") as f:
+        lines = f.readlines()
+
+    # Find the line with the class definition
+    class_def_index = next(i for i, line in enumerate(
+        lines) if 'class Settings(BaseSettings):' in line)
+
+    # Insert the new line after the class definition
+    lines.insert(class_def_index + 3, '    MONGO_URI:  str = None\n')
+
+    # Write the modified lines back to the file
+    with open(settings_path, "w") as f:
+        f.writelines(lines)
