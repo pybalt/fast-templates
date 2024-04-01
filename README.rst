@@ -1,5 +1,5 @@
 =======================
-FastAPI-TemplateWizard
+fast-templates
 =======================
 
 CLI that contains fastapi templates for different projects
@@ -7,11 +7,11 @@ CLI that contains fastapi templates for different projects
 Installation
 ============
 
-Use the package manager `pip <https://pip.pypa.io/en/stable/>`_ to install FastAPI Template Wizard.
+Use the package manager `pip <https://pip.pypa.io/en/stable/>`_ to install Fast-Templates.
 
 .. code-block:: bash
 
-   pip install FastAPI-TemplateWizard
+   pip install fast-templates
 
 Usage
 =====
