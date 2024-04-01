@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='FastCLI',
+    name='FastAPI-TemplateWizard',
     version='0.1.0',
     packages=find_packages(),
     url='https://github.com/pybalt/FastCLI',
-    author='Leonel B. Bravo',
-    author_email='leonelbbravo@gmail.com',
+    author='pybalt',
+    author_email='96897286+pybalt@users.noreply.github.com',
     description='A CLI to generate FastAPI templates',
     install_requires=[
         'typer',
