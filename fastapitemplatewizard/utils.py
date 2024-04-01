@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from constants import WORKING_DIR
+from fastapitemplatewizard.constants import WORKING_DIR
 
 
 def copy_files(src_dir, dst_dir, ignore_dirs=None):
