@@ -5,7 +5,7 @@ with open("README.rst", "r", encoding="utf-8") as fh:
 
 setup(
     name='FastAPI-TemplateWizard',
-    version='0.1.3',
+    version='0.1.5',
     packages=find_packages(),
     url='https://github.com/pybalt/FastAPI-TemplateWizard',
     author='pybalt',
@@ -18,6 +18,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        fastcli=FastAPI-TemplateWizard.main:app
+        fastcli=fastapitemplatewizard.main:app
     '''
 )
