@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
-with open("README.md", "r", encoding="utf-8") as fh:
+with open("README.rst", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
     name='FastAPI-TemplateWizard',
-    version='0.1.2',
+    version='0.1.3',
     packages=find_packages(),
     url='https://github.com/pybalt/FastAPI-TemplateWizard',
     author='pybalt',
@@ -18,6 +18,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        fastcli=FastCLI.main:app
+        fastcli=FastAPI-TemplateWizard.main:app
     '''
 )
