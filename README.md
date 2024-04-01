@@ -1,4 +1,4 @@
-# FastAPI-TemplateWizard
+# FAST-TEMPLATES
 
 CLI that contains fastapi templates for differents projects
 
