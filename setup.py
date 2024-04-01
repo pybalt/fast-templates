@@ -7,6 +7,7 @@ setup(
     name='fast-templates',
     version='0.1.6',
     packages=find_packages(),
+    package_data={'': ['**/*']},
     url='https://github.com/pybalt/FastAPI-TemplateWizard',
     author='pybalt',
     author_email='96897286+pybalt@users.noreply.github.com',
