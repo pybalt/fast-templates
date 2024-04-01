@@ -18,6 +18,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        fastcli=fastapitemplatewizard.main:app
+        fastcli=fasttemplates.main:app
     '''
 )
