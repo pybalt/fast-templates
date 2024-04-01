@@ -1,0 +1,17 @@
+annotated-types
+anyio
+fastapi
+hiredis
+idna
+pydantic
+pydantic_core
+python-dotenv
+python-multipart
+PyYAML
+redis
+sniffio
+starlette
+typing_extensions
+ujson
+websockets
+cachetools
