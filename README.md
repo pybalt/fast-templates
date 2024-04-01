@@ -1,2 +1,3 @@
-# fastapi-templates
-Fastapi templates for differents projects
+# FastCLI
+
+CLI that contains fastapi templates for differents projects
