@@ -5,9 +5,9 @@ with open("README.rst", "r", encoding="utf-8") as fh:
 
 setup(
     name='fast-templates',
-    version='0.1.7',
+    version='0.1.8',
     packages=find_packages(),
-    package_data={'': ['**/*']},
+    package_data={'': ['**/*', '.env', '.gitignore']},
     url='https://github.com/pybalt/FastAPI-TemplateWizard',
     author='pybalt',
     author_email='96897286+pybalt@users.noreply.github.com',
