@@ -27,7 +27,7 @@ FASTAPI_WITH_DJANGO_ORM = 'https://github.com/uhttred/fastapi-with-django-orm-te
 DOCKER_COMPOSE_YML = """    depends_on:
         - db
     environment:
-        - MONGO_URI: mongodb://db:27017
+      MONGO_URI: "mongodb://db:27017"
   db:
     image: mongo:latest
     ports:

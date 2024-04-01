@@ -1,10 +1,12 @@
 annotated-types
 anyio
+uvicorn
 fastapi
 hiredis
 idna
 pydantic
 pydantic_core
+pydantic_settings
 python-dotenv
 python-multipart
 PyYAML
