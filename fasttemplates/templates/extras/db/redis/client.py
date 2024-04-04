@@ -1,5 +1,6 @@
 from redis import Redis, ConnectionPool
+from app.settings import settings
 
-pool = ConnectionPool(host=..., port=..., db=...)
+pool = ConnectionPool(settings.REDIS_URI)
 
 redis_client = Redis(connection_pool=pool)

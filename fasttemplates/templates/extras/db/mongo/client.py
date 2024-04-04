@@ -1,6 +1,4 @@
 from pymongo import MongoClient
+from app.settings import settings
 
-HOST = ...
-PORT = ...
-
-client = MongoClient(HOST, PORT)
+client = MongoClient(settings.MONGO_URI)

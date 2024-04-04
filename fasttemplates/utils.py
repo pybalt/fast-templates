@@ -21,20 +21,40 @@ def copy_files(src_dir, dst_dir, ignore_dirs=None):
         else:
             shutil.copy2(src_item, dst_item)
 
-
-def add_mongo_uri_to_settings():
-    # Add MONGO_URI to Settings class
+def cout_settings_properties() -> int:
     settings_path = os.path.join(WORKING_DIR, "app\\settings.py")
     with open(settings_path, "r") as f:
         lines = f.readlines()
-
-    # Find the line with the class definition
+    
     class_def_index = next(i for i, line in enumerate(
-        lines) if 'class Settings(BaseSettings):' in line)
+        lines) if SETTINGS_CLASS_DEFINITION in line)
+    
+    return len([line for line in lines if line.strip() and not line.strip().startswith('#')])+1
 
-    # Insert the new line after the class definition
-    lines.insert(class_def_index + 3, '    MONGO_URI:  str = None\n')
+def add_property_to_settings(_K: str, _T: type, _V: str) -> None:
+    settings_path = os.path.join(WORKING_DIR, SETTINGS_DIR)
+    with open(settings_path, "r") as f:
+        lines = f.readlines()
+    
+    NUMBER_OF_PROPERTIES = cout_settings_properties()
+    lines.insert(NUMBER_OF_PROPERTIES, f'    {_K}: {_T.__name__} = {_V}\n')
 
-    # Write the modified lines back to the file
     with open(settings_path, "w") as f:
         f.writelines(lines)
+
+def add_mongo_uri_to_settings():
+    add_property_to_settings('MONGO_URI', str, "'mongodb://localhost:27017'")
+
+def add_redis_uri_to_settings():
+    add_property_to_settings('REDIS_URI', str, "'redis://localhost:6379/0'")
+
+def on_rm_error(func, path, exc_info) -> None:
+    "Error handler for `shutil.rmtree`"
+    os.chmod(path, stat.S_IWRITE)
+    os.unlink(path)
+
+def clone_and_copy(repo_url: str) -> None:
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        os.system(f'git clone {repo_url} {tmpdirname}')
+        shutil.rmtree(os.path.join(tmpdirname, '.git'), onerror=on_rm_error)
+        copy_files(tmpdirname, WORKING_DIR)

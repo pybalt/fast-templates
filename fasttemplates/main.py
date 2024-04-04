@@ -2,6 +2,10 @@ import os
 
 import typer
 import questionary
+import tempfile
+import shutil
+import stat
+import yaml
 
 from fasttemplates.constants import *
 from fasttemplates.utils import *
@@ -26,15 +30,16 @@ def custom() -> None:
         if cache:
             add_cache_with_redis()
             print("Redis cache added")
+    
+    create_docker_compose()
 
 
 def popular() -> None:
     "Clones the popular template from the github repository"
 
     optionLambdas = {
-        FASTAPI_FS: lambda: os.system(f'git clone {FASTAPI_FULLSTACK} {WORKING_DIR}'),
-        FASTAPI_DJANGO_ORM: lambda: os.system(
-            f'git clone {FASTAPI_WITH_DJANGO_ORM} {WORKING_DIR}')
+        FASTAPI_FS: lambda: clone_and_copy(FASTAPI_FULLSTACK),
+        FASTAPI_DJANGO_ORM: lambda: clone_and_copy(FASTAPI_WITH_DJANGO_ORM),
     }
 
     option = questionary.select("Which popular template do you want to clone?", choices=[
@@ -43,7 +48,6 @@ def popular() -> None:
     optionLambdas[option]()
 
     print("Popular template added")
-
 
 @app.command()
 def main() -> None:
@@ -70,17 +74,25 @@ def add_mongo() -> None:
     with open(os.path.join(WORKING_DIR, "requirements.txt"), "a") as f:
         f.write("\ndnspython\npymongo\n")
 
-    # Modify docker-compose.yml
-    with open(os.path.join(WORKING_DIR, "docker-compose.yml"), "a") as f:
-        f.write(DOCKER_COMPOSE_YML)
+    docker_compose_dict['services'].update(mongo_service)
+    docker_compose_dict['volumes'].update(mongo_volume)
 
     add_mongo_uri_to_settings()
 
+
+def create_docker_compose() -> None:
+    with open(os.path.join(WORKING_DIR, "docker-compose.yml"), "w") as f:
+        yaml.dump(docker_compose_dict, f, default_flow_style=False, sort_keys=False)
 
 def add_redis() -> None:
     REDIS_DIR = os.path.join(WORKING_DIR, DB_DIR)
     os.makedirs(REDIS_DIR, exist_ok=True)
     copy_files(DB_TREE, REDIS_DIR, ignore_dirs=[MONGO_DIR_NAME])
+
+    docker_compose_dict['services'].update(redis_service)
+    docker_compose_dict['volumes'].update(redis_volume)
+
+    add_redis_uri_to_settings()
 
 
 def add_cache_with_redis() -> None:
